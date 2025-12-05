@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-lg-8">
+    <h3 class="mb-1"><%= service.title %></h3>
+    <div class="text-muted mb-3">by <%= service.provider_name %></div>
+    <p><%= service.description %></p>
+  </div>
+  <div class="col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between"><span>Base Rate</span><strong>$<%= service.base_rate %></strong></div>
+        <div class="d-flex justify-content-between"><span>Incentive</span><span class="badge bg-info text-dark"><%= service.incentive_type %></span></div>
+        <% if (service.incentive_details) { %>
+          <div class="small text-muted mt-2"><%= service.incentive_details %></div>
+        <% } %>
+        <% if (currentUser && currentUser.role === 'client') { %>
+          <a href="/engagements/new/<%= service.id %>" class="btn btn-primary w-100 mt-3">Start Engagement</a>
+        <% } else if (!currentUser) { %>
+          <a href="/login" class="btn btn-outline-primary w-100 mt-3">Login to Engage</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

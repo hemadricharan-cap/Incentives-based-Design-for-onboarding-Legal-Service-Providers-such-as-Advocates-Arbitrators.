@@ -1,0 +1,20 @@
+<h3 class="mb-3">Start Engagement: <%= service.title %></h3>
+
+<form method="post" action="/engagements">
+  <input type="hidden" name="serviceId" value="<%= service.id %>" />
+  <div class="row g-3">
+    <% for (let i = 1; i <= 5; i++) { %>
+      <div class="col-md-8">
+        <label class="form-label">Milestone <%= i %> Title</label>
+        <input class="form-control" name="milestoneTitle<%= i %>" placeholder="e.g., Draft Petition" />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Amount (USD)</label>
+        <input type="number" step="0.01" min="0" class="form-control" name="milestoneAmount<%= i %>" />
+      </div>
+    <% } %>
+  </div>
+  <button class="btn btn-primary mt-3">Create Engagement</button>
+</form>
+
+

@@ -1,0 +1,27 @@
+<h3 class="mb-3">Engagements</h3>
+
+<% if (!engagements.length) { %>
+  <div class="alert alert-info">No engagements yet.</div>
+<% } %>
+
+<div class="list-group">
+  <% engagements.forEach(e => { %>
+    <a class="list-group-item list-group-item-action" href="/engagements/<%= e.id %>">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div class="fw-semibold">
+            <% if (role === 'provider') { %>
+              <%= e.service_title %> · with <%= e.client_name %>
+            <% } else { %>
+              <%= e.service_title %> · by <%= e.provider_name %>
+            <% } %>
+          </div>
+          <div class="small text-muted">Status: <%= e.status %> · Created: <%= new Date(e.created_at).toLocaleString() %></div>
+        </div>
+        <span class="badge <%= e.status === 'active' ? 'bg-success' : 'bg-secondary' %>"><%= e.status %></span>
+      </div>
+    </a>
+  <% }) %>
+</div>
+
+

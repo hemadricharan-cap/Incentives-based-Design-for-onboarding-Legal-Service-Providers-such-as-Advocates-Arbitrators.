@@ -1,0 +1,60 @@
+<section class="py-5 hero bg-gradient">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold mb-3">Incentives-based platform for legal service providers</h1>
+        <p class="lead">Align outcomes with incentives. Create milestone-based projects, performance bonuses, and referral rewards to deliver better legal results.</p>
+        <div class="d-flex gap-3 mt-3">
+          <% if (!currentUser) { %>
+            <a href="/register" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="/services" class="btn btn-outline-primary btn-lg">Browse Services</a>
+          <% } else { %>
+            <a href="/dashboard" class="btn btn-primary btn-lg">Go to Dashboard</a>
+            <a href="/services" class="btn btn-outline-primary btn-lg">Browse Services</a>
+          <% } %>
+        </div>
+      </div>
+      <div class="col-lg-6 mt-4 mt-lg-0">
+        <div class="card shadow-lg border-0">
+          <div class="card-body">
+            <h5 class="card-title">How it works</h5>
+            <ol class="mb-0">
+              <li>Create a provider or client account</li>
+              <li>Post services with incentive structures</li>
+              <li>Start engagements with clear milestones</li>
+              <li>Mark milestones complete to trigger payouts</li>
+              <li>Refer others and earn reward points</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature p-4 rounded shadow-sm h-100">
+          <h5>Milestone Payouts</h5>
+          <p class="mb-0">Break down cases into milestones and pay upon completion for aligned incentives.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature p-4 rounded shadow-sm h-100">
+          <h5>Performance Bonuses</h5>
+          <p class="mb-0">Reward exceptional outcomes with configurable bonus structures.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature p-4 rounded shadow-sm h-100">
+          <h5>Referral Rewards</h5>
+          <p class="mb-0">Share your referral code to earn points when colleagues join.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

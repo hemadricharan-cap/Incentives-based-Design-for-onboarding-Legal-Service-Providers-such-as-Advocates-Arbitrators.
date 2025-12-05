@@ -1,0 +1,96 @@
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="mb-3">Welcome, <%= user.name %></h4>
+        <% if (user.role === 'provider') { %>
+          <div class="row text-center">
+            <div class="col-md-4 mb-3">
+              <div class="stat p-3 rounded">
+                <div class="small text-muted">Total Earnings</div>
+                <div class="h4">$<%= earnings.toFixed(2) %></div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="stat p-3 rounded">
+                <div class="small text-muted">Reward Points</div>
+                <div class="h4"><%= user.points %> pts</div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="stat p-3 rounded">
+                <div class="small text-muted">Referral Code</div>
+                <div class="h5"><code><%= user.referral_code %></code></div>
+              </div>
+            </div>
+          </div>
+          <canvas id="earningsChart" height="120"></canvas>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              const ctx = document.getElementById('earningsChart');
+              if (!ctx) return;
+              const data = {
+                labels: <%- JSON.stringify(payouts.map(p => new Date(p.created_at).toLocaleDateString())) %>,
+                datasets: [{
+                  label: 'Payouts',
+                  data: <%- JSON.stringify(payouts.map(p => p.amount)) %>,
+                  fill: true,
+                  borderColor: '#0d6efd',
+                  backgroundColor: 'rgba(13,110,253,0.1)'
+                }]
+              };
+              new Chart(ctx, { type: 'line', data });
+            });
+          </script>
+        <% } else { %>
+          <div class="row text-center">
+            <div class="col-md-6 mb-3">
+              <div class="stat p-3 rounded">
+                <div class="small text-muted">Active Engagements</div>
+                <div class="h4"><%= clientEngagements.filter(e => e.status === 'active').length %></div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="stat p-3 rounded">
+                <div class="small text-muted">Completed</div>
+                <div class="h4"><%= clientEngagements.filter(e => e.status === 'completed').length %></div>
+              </div>
+            </div>
+          </div>
+          <p>Your referral code: <code><%= user.referral_code %></code></p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="mb-2">Quick Actions</h5>
+        <% if (user.role === 'provider') { %>
+          <a href="/services/new" class="btn btn-primary w-100 mb-2">Create Service</a>
+          <a href="/services/mine" class="btn btn-outline-primary w-100">View My Services</a>
+        <% } else { %>
+          <a href="/services" class="btn btn-primary w-100">Browse Services</a>
+        <% } %>
+      </div>
+    </div>
+    <% if (user.role === 'provider' && services.length) { %>
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="mb-2">My Recent Services</h5>
+        <ul class="list-group list-group-flush">
+          <% services.slice(0,5).forEach(s => { %>
+            <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+              <span><%= s.title %></span>
+              <a class="btn btn-sm btn-outline-secondary" href="/services/<%= s.id %>">View</a>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+    <% } %>
+  </div>
+  
+</div>
+
+

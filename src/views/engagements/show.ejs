@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h3><%= engagement.service_title %></h3>
+  <span class="badge <%= engagement.status === 'active' ? 'bg-success' : 'bg-secondary' %>"><%= engagement.status %></span>
+</div>
+
+<div class="mb-3 text-muted">
+  Client: <strong><%= engagement.client_name %></strong> · Provider: <strong><%= engagement.provider_name %></strong>
+  <div class="small">Started: <%= new Date(engagement.created_at).toLocaleString() %></div>
+  
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h5 class="mb-3">Milestones</h5>
+    <ul class="list-group">
+      <% milestones.forEach(m => { %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <div class="fw-semibold"><%= m.title %></div>
+            <div class="small text-muted">$<%= m.amount %></div>
+          </div>
+          <div>
+            <% if (m.is_completed) { %>
+              <span class="badge bg-success">Completed</span>
+            <% } else if (currentUser && currentUser.id === engagement.provider_id) { %>
+              <form method="post" action="/engagements/milestones/<%= m.id %>/complete">
+                <button class="btn btn-sm btn-primary">Mark Complete</button>
+              </form>
+            <% } else { %>
+              <span class="badge bg-warning text-dark">Pending</span>
+            <% } %>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+
+

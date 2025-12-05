@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>My Services</h3>
+  <a href="/services/new" class="btn btn-primary">Create Service</a>
+</div>
+
+<% if (!services.length) { %>
+  <div class="alert alert-info">You haven't created any services yet.</div>
+<% } %>
+
+<ul class="list-group">
+  <% services.forEach(s => { %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <div class="fw-semibold"><%= s.title %></div>
+        <div class="small text-muted">$<%= s.base_rate %> · <%= s.incentive_type %></div>
+      </div>
+      <a class="btn btn-sm btn-outline-secondary" href="/services/<%= s.id %>">View</a>
+    </li>
+  <% }) %>
+  
+</ul>
+
+

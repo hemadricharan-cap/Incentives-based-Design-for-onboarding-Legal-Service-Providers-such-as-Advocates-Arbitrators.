@@ -1,0 +1,11 @@
+:root {
+  --brand-grad-start: #eff6ff;
+  --brand-grad-end: #e9f5ff;
+}
+body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+.hero { background: linear-gradient(180deg, var(--brand-grad-start), var(--brand-grad-end)); border-bottom: 1px solid #e5e7eb; }
+.feature { background: #fff; }
+.stat { background: #f8fafc; border: 1px solid #e5e7eb; }
+code { color: #0d6efd; }
+
+
